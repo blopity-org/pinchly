@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micro Web Kit Builder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/965799bb38.js" crossorigin="anonymous"></script>
+    <link href="style.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="./media/favicon.ico">
+</head>
+
+<body>
+    <div class="header">
+        <h1>Pinchly</h1>
+        <h2>App Builder</h2>
+        <p>Start building your dream app here!</p>
+    </div>
+    <div id="navbar">
+        <a href="index.html">
+            Pinchly
+        </a>
+        <a class="active" href="builder.html">
+            Create
+        </a>
+        <a href="apps.html">
+            Explore
+        </a>
+        <a href="community.html">
+            Community
+        </a>
+        <a href="inbox.html">
+            Inbox
+        </a>
+    </div>
+    <div class="auth-bar" id="auth-bar"></div>
+    <div class="page-shell">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">App Builder</p>
+                <h1>Create a new app without writing code</h1>
+            </div>
+            <nav class="topbar-nav">
+                <a href="index.html">Pinchly</a>
+                <a href="apps.html">Apps</a>
+                <a href="builder.html">App Builder</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="card">
+                <div class="container builder-shell">
+                    <div class="mwk-text">
+                        <p>Fill in the form below, then copy the generated JSON block into the apps section of your
+                            data.json file. This makes it easy to create calculators, style demos, and even periodic
+                            table-style experiences.</p>
+                    </div>
+
+                    <div class="builder-grid">
+                        <section class="builder-panel">
+                            <div class="mwk-field">
+                                <label for="template">Start from a template</label>
+                                <select id="template">
+                                    <option value="blank">Blank app</option>
+                                    <option value="calculator">Calculator</option>
+                                    <option value="periodic">Periodic table</option>
+                                </select>
+                            </div>
+                            <div class="mwk-field">
+                                <label for="appName">App key</label>
+                                <input id="appName" value="__mwk_custom_app">
+                            </div>
+                            <div class="mwk-field">
+                                <label for="appEmoji">Emoji</label>
+                                <input id="appEmoji" value="🧩">
+                            </div>
+                            <div class="mwk-field">
+                                <label for="appTitle">Title</label>
+                                <input id="appTitle" value="My first app">
+                            </div>
+                            <div class="mwk-field">
+                                <label for="appSubtitle">Subtitle</label>
+                                <input id="appSubtitle" value="A simple app built with Micro Web Kit">
+                            </div>
+                            <div class="mwk-field">
+                                <label for="accentColor">Accent color</label>
+                                <input id="accentColor" type="color" value="#5b6cff">
+                            </div>
+                            <div class="mwk-field">
+                                <label for="bodyHtml">Body HTML</label>
+                                <textarea id="bodyHtml"></textarea>
+                            </div>
+                            <div class="mwk-field">
+                                <label for="styleCss">Extra CSS</label>
+                                <textarea id="styleCss"></textarea>
+                            </div>
+                            <div class="builder-actions">
+                                <button class="btn-primary" id="generateBtn" type="button">Generate JSON</button>
+                                <button class="btn-secondary" id="copyBtn" type="button">Copy JSON</button>
+                            </div>
+                        </section>
+
+                        <section class="builder-panel">
+                            <label for="jsonOutput">Paste this into data.json</label>
+                            <textarea id="jsonOutput"></textarea>
+                            <div class="mwk-output" id="builderStatus">Ready to create your next app.</div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="./js/script.js"></script>
+    <script>
+        const templateSelect = document.getElementById('template');
+        const appName = document.getElementById('appName');
+        const appEmoji = document.getElementById('appEmoji');
+        const appTitle = document.getElementById('appTitle');
+        const appSubtitle = document.getElementById('appSubtitle');
+        const accentColor = document.getElementById('accentColor');
+        const bodyHtml = document.getElementById('bodyHtml');
+        const styleCss = document.getElementById('styleCss');
+        const jsonOutput = document.getElementById('jsonOutput');
+        const status = document.getElementById('builderStatus');
+
+        const templates = {
+            blank: {
+                body: "<mwk_text>Write your app content here.</mwk_text>",
+                css: ""
+            },
+            calculator: {
+                body: "<mwk_text>Enter two values and calculate.</mwk_text><div class='mwk-grid-2'><div class='mwk-card-panel'><div class='mwk-field'><label for='__mwk_input1'>Value A</label><input class='mwk-input' id='__mwk_input1' name='__mwk_input1' type='number'></div><div class='mwk-field'><label for='__mwk_input2'>Value B</label><input class='mwk-input' id='__mwk_input2' name='__mwk_input2' type='number'></div><mwk_submit label='Add values'></mwk_submit><div class='mwk-output' id='mwkDocFooter'>Result appears here.</div></div></div>",
+                css: ".mwk-card-panel { background: linear-gradient(135deg, rgba(37, 99, 235, 0.14), rgba(45, 212, 191, 0.12)); }"
+            },
+            periodic: {
+                body: "<div class='periodic-grid'><button class='periodic-element' data-name='Hydrogen' data-info='Hydrogen is the lightest element.'>H</button><button class='periodic-element' data-name='Oxygen' data-info='Oxygen is essential for life.'>O</button><button class='periodic-element' data-name='Gold' data-info='Gold is a precious metal used in jewelry.'>Au</button></div><div class='periodic-detail' id='periodic-detail'></div>",
+                css: ".periodic-grid { grid-template-columns: repeat(6, minmax(36px, 1fr)); }"
+            }
+        };
+
+        function applyTemplate(name) {
+            const template = templates[name] || templates.blank;
+            bodyHtml.value = template.body;
+            styleCss.value = template.css;
+        }
+
+        function generateJson() {
+            const appObject = {
+                name: appTitle.value || 'My app',
+                emoji: appEmoji.value || '🧩',
+                title: appTitle.value || 'My app',
+                subtitle: appSubtitle.value || 'Built with Micro Web Kit',
+                theme: {
+                    accent: accentColor.value,
+                    surface: '#ffffffee',
+                    background: '#f7f8ff',
+                    text: '#132238',
+                    border: '#dfe7f0'
+                },
+                body: bodyHtml.value,
+                styles: styleCss.value || ''
+            };
+
+            if (bodyHtml.value.includes('__mwk_input1') || bodyHtml.value.includes('__mwk_input2')) {
+                appObject.scripts = {
+                    onsubmit: {
+                        execute_on: ['__mwk_submit'],
+                        code_type: '__mwk_script_v0.1',
+                        lines: [
+                            '__mwk_setvar result __mwk_calc __mwk_input1 + __mwk_input2',
+                            '__mwk_setvar __mwk_doc_footer result'
+                        ]
+                    }
+                };
+            }
+
+            const snippet = `"${appName.value || '__mwk_custom_app'}": ${JSON.stringify(appObject, null, 2)}`;
+            jsonOutput.value = snippet;
+            status.textContent = 'JSON generated. Paste it into the apps object in data.json.';
+            localStorage.setItem('mwk-builder-draft', JSON.stringify({
+                appName: appName.value,
+                appEmoji: appEmoji.value,
+                appTitle: appTitle.value,
+                appSubtitle: appSubtitle.value,
+                accentColor: accentColor.value,
+                bodyHtml: bodyHtml.value,
+                styleCss: styleCss.value,
+                template: templateSelect.value
+            }));
+        }
+
+        document.getElementById('generateBtn').addEventListener('click', generateJson);
+        document.getElementById('copyBtn').addEventListener('click', async () => {
+            await navigator.clipboard.writeText(jsonOutput.value);
+            status.textContent = 'Copied to clipboard.';
+        });
+        templateSelect.addEventListener('change', () => applyTemplate(templateSelect.value));
+
+        const draft = localStorage.getItem('mwk-builder-draft');
+        if (draft) {
+            const parsed = JSON.parse(draft);
+            appName.value = parsed.appName || appName.value;
+            appEmoji.value = parsed.appEmoji || appEmoji.value;
+            appTitle.value = parsed.appTitle || appTitle.value;
+            appSubtitle.value = parsed.appSubtitle || appSubtitle.value;
+            accentColor.value = parsed.accentColor || accentColor.value;
+            bodyHtml.value = parsed.bodyHtml || bodyHtml.value;
+            styleCss.value = parsed.styleCss || styleCss.value;
+            templateSelect.value = parsed.template || templateSelect.value;
+        } else {
+            applyTemplate(templateSelect.value);
+        }
+
+        generateJson();
+    </script>
+</body>
+
+</html>

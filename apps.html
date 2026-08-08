@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Micro Web Kit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/965799bb38.js" crossorigin="anonymous"></script>
+    <link href="style.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="./media/favicon.ico">
+</head>
+
+<body>
+    <div class="header">
+        <h1>Pinchly</h1>
+        <h2>App Library</h2>
+        <p>See our app library for inspiration!</p>
+    </div>
+    <div id="navbar">
+        <a href="index.html">
+            Pinchly
+        </a>
+        <a href="builder.html">
+            Create
+        </a>
+        <a class="active" href="apps.html">
+            Explore
+        </a>
+        <a href="community.html">
+            Community
+        </a>
+        <a href="inbox.html">
+            Inbox
+        </a>
+    </div>
+    <div class="auth-bar" id="auth-bar"></div>
+    <div class="page-shell">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">Micro Web Kit</p>
+                <h1>Create tiny apps from structured data</h1>
+            </div>
+            <nav class="topbar-nav">
+                <a href="index.html">Pinchly</a>
+                <a href="apps.html">Apps</a>
+                <a href="builder.html">App Builder</a>
+            </nav>
+        </header>
+        <div class="slick-bg">
+            <main>
+                <div class="card">
+                    <div class="container" id="app-container"></div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="./js/urlparams.polyfill.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>

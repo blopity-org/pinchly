@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Micro Web Kit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/965799bb38.js" crossorigin="anonymous"></script>
+    <link href="style.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="./media/favicon.ico">
+</head>
+
+<body>
+    <div class="header">
+        <h1>Pinchly</h1>
+        <h2>Community</h2>
+        <p><em>Pinch in</em> together!</p>
+    </div>
+    <div id="navbar">
+        <a href="index.html">
+            Pinchly
+        </a>
+        <a href="builder.html">
+            Create
+        </a>
+        <a href="apps.html">
+            Explore
+        </a>
+        <a class="active" href="community.html">
+            Community
+        </a>
+        <a href="inbox.html">
+            Inbox
+        </a>
+    </div>
+    <div class="auth-bar" id="auth-bar"></div>
+    <div class="page-shell">
+        <div class="slick-bg">
+            <main>
+                <div class="card">
+                    <div class="container" id="app-container"></div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="./js/urlparams.polyfill.js"></script>
+    <script src="./js/script.js"></script>
+    <script>
+        const usersData = {
+            "pinchi": {
+                "name": "Pinchi",
+                "github": "GreatCoder1000",
+                "bio": "Creator of the Pinchly platform, building tiny apps with personality.",
+                "apps": ["Pinchly CLI Shell", "JSON Journal", "JS Code Lab"],
+                "status": "Always experimenting with new app formats and social features."
+            },
+            "demo": {
+                "name": "Demo User",
+                "github": "demo-user",
+                "bio": "A friendly explorer of creative app ideas.",
+                "apps": ["Style Playground", "Periodic Table Explorer"],
+                "status": "Trying out app storage and CLI workflows."
+            },
+            "nova": {
+                "name": "Nova",
+                "github": "nova-dev",
+                "bio": "Builds responsive experiences and shared micro-tools.",
+                "apps": ["Math Lab", "Custom Builder"],
+                "status": "Loves collaborative app design and polished interactions."
+            }
+        }
+
+        const appContainer = document.getElementById("app-container");
+        const params = getUrlParamsManual();
+        const user = params.user;
+
+        if (!user) {
+            appContainer.innerHTML = `
+                <h2>Community</h2>
+                <p class="mwk-tip">Explore creators, see their apps, and jump into the Pinchly network.</p>
+                <ul class="app-ul">
+                    ${Object.keys(usersData)
+                    .map(
+                        (handle) =>
+                            `<li><a href="community.html?user=${handle}">&#64;${handle} — ${usersData[handle].bio}</a></li>`
+                    )
+                    .join('')}
+                </ul>
+            `
+        } else if (usersData[user]) {
+            const profile = usersData[user]
+            appContainer.innerHTML = `
+                <div class="app-header">
+                    <h1>@${user}</h1>
+                    <p class="app-subtitle">${profile.bio}</p>
+                </div>
+                <section class="mwk-section">
+                    <p class="mwk-tip">${profile.status}</p>
+                    <h2>Featured apps</h2>
+                    <ul class="app-ul">
+                        ${profile.apps.map((app) => `<li>${escapeHtml(app)}</li>`).join('')}
+                    </ul>
+                    <p><a class="back-link" href="community.html">&laquo; Back to community</a></p>
+                </section>
+            `
+        } else {
+            appContainer.innerHTML = `
+                <h2>User not found</h2>
+                <p class="mwk-tip">Try one of the active profiles below.</p>
+                <ul class="app-ul">
+                    ${Object.keys(usersData)
+                    .map(
+                        (handle) =>
+                            `<li><a href="community.html?user=${handle}">&#64;${handle}</a></li>`
+                    )
+                    .join('')}
+                </ul>
+            `
+        }
+    </script>
+</body>
+
+</html>

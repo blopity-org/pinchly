@@ -1,0 +1,175 @@
+{
+    "folders": {
+        "__mwk_util": {
+            "name": "MWK Utilities",
+            "emoji": "⚙️",
+            "parent": "__mwk_root",
+            "children": [
+                "__mwk_hello",
+                "__mwk_calculator",
+                "__mwk_math_lab"
+            ]
+        },
+        "__mwk_examples": {
+            "name": "Interactive Examples",
+            "emoji": "✨",
+            "parent": "__mwk_root",
+            "children": [
+                "__mwk_style_playground",
+                "__mwk_periodic_table"
+            ]
+        },
+        "__mwk_root": {
+            "name": "MWK Root",
+            "parent": null,
+            "children": [
+                "__mwk_util",
+                "__mwk_examples",
+                "__mwk_studio"
+            ]
+        },
+        "__mwk_studio": {
+            "name": "Pinchly Studio",
+            "emoji": "🛠️",
+            "parent": "__mwk_root",
+            "children": [
+                "__mwk_cli_shell",
+                "__mwk_json_journal",
+                "__mwk_code_lab"
+            ]
+        }
+    },
+    "apps": {
+        "__mwk_hello": {
+            "name": "MWK Hello",
+            "emoji": "👋",
+            "title": "Hello!",
+            "subtitle": "How are you doing today?",
+            "body": "<mwk_text>This app is so cool.</mwk_text>"
+        },
+        "__mwk_404": {
+            "name": "MWK Error 404",
+            "emoji": "😣",
+            "title": "Oh no...",
+            "subtitle": "ERROR: 404 FILE NOT FOUND",
+            "body": "<mwk_text>Sorry, but we can't find your amazing app yet.</mwk_text>"
+        },
+        "__mwk_calculator": {
+            "name": "MWK Calculator",
+            "title": "Calculator",
+            "subtitle": "Try the built-in math engine",
+            "body": "<mwk_text>Enter two numbers and press submit.</mwk_text><mwk_input1><mwk_input2><mwk_submit label='Add numbers'></mwk_submit>",
+            "scripts": {
+                "onsubmit": {
+                    "execute_on": [
+                        "__mwk_submit"
+                    ],
+                    "code_type": "__mwk_script_v0.1",
+                    "lines": [
+                        "__mwk_setvar sum __mwk_calc __mwk_input1 + __mwk_input2",
+                        "__mwk_setvar __mwk_doc_footer sum"
+                    ]
+                }
+            }
+        },
+        "__mwk_math_lab": {
+            "name": "Math Lab",
+            "emoji": "🧮",
+            "title": "Math Lab",
+            "subtitle": "Use simple formulas and built-in operators",
+            "theme": {
+                "accent": "#2563eb",
+                "surface": "#f8fbff",
+                "background": "#eef6ff",
+                "text": "#172554",
+                "border": "#d7e7ff"
+            },
+            "body": "<mwk_text>Try formulas like 12 + 8, 2 ^ 8, 15 / 3, abs(-7), sqrt(81), round(4.6), floor(4.9), ceil(4.1).</mwk_text><div class='mwk-grid-2'><div class='mwk-card-panel'><div class='mwk-field'><label for='__mwk_input1'>Value A</label><input class='mwk-input' id='__mwk_input1' name='__mwk_input1' type='number' value='10'></div><div class='mwk-field'><label for='__mwk_input2'>Value B</label><input class='mwk-input' id='__mwk_input2' name='__mwk_input2' type='number' value='5'></div><mwk_submit label='Evaluate'></mwk_submit><div class='mwk-output' id='mwkDocFooter'>Your result appears here.</div></div><div class='mwk-card-panel'><p class='mwk-tip'>The engine supports +, -, *, /, %, ^, abs(), sqrt(), round(), floor(), and ceil().</p></div></div>",
+            "scripts": {
+                "onsubmit": {
+                    "execute_on": [
+                        "__mwk_submit"
+                    ],
+                    "code_type": "__mwk_script_v0.1",
+                    "lines": [
+                        "__mwk_setvar sum __mwk_calc __mwk_input1 + __mwk_input2",
+                        "__mwk_setvar __mwk_doc_footer sum"
+                    ]
+                }
+            }
+        },
+        "__mwk_style_playground": {
+            "name": "Style Playground",
+            "emoji": "🎨",
+            "title": "Style Playground",
+            "subtitle": "Basic theme controls and layout options",
+            "theme": {
+                "accent": "#7c3aed",
+                "surface": "#fdf8ff",
+                "background": "#f5ebff",
+                "text": "#2f2347",
+                "border": "#e1cfff"
+            },
+            "styles": ".mwk-card-panel { background: linear-gradient(135deg, rgba(124, 58, 237, 0.16), rgba(45, 212, 191, 0.14)); }",
+            "body": "<mwk_text>This app demonstrates new style options such as accent colors, card surfaces, borders, and custom CSS hooks.</mwk_text><div class='mwk-row'><button class='btn-primary'>Primary button</button><button class='btn-secondary'>Secondary button</button></div><div class='mwk-section'><p class='mwk-tip'>You can add a theme object and a custom CSS string to any app entry in data.json.</p></div>"
+        },
+        "__mwk_cli_shell": {
+            "name": "CLI Shell",
+            "emoji": "💻",
+            "title": "Pinchly CLI Shell",
+            "subtitle": "Run workspace commands and inspect app storage",
+            "cli": true,
+            "data": {
+                "history": [],
+                "notes": [
+                    "Welcome to Pinchly CLI. Type help to begin."
+                ]
+            },
+            "cliIntro": "Welcome to the Pinchly CLI shell. Type help for available commands. Your saved app state is loaded per account.",
+            "body": "<mwk_text>Interact with this app through the terminal below. Use <code>get</code>, <code>set</code>, <code>json</code>, and <code>clear</code> to explore stored state.</mwk_text>"
+        },
+        "__mwk_json_journal": {
+            "name": "JSON Journal",
+            "emoji": "📓",
+            "title": "JSON Journal",
+            "subtitle": "Store your notes as JSON data",
+            "type": "json",
+            "allowStorage": true,
+            "data": {
+                "entries": [
+                    "This journal is saved to your account.",
+                    "Use the editor below to change JSON state."
+                ]
+            },
+            "body": "<mwk_text>Save structured notes and explore the shared JSON storage model.</mwk_text>"
+        },
+        "__mwk_code_lab": {
+            "name": "Code Lab",
+            "emoji": "🧪",
+            "title": "JS Code Lab",
+            "subtitle": "Test code and update app storage",
+            "codeEditor": true,
+            "data": {
+                "runs": 0,
+                "message": "A smart app with custom code and saved storage."
+            },
+            "javascript": "// Update storage and return a friendly status message\nconst next = {...storage, runs: (storage?.runs || 0) + 1}\nsetStorage(next)\nreturn `Ran ${next.runs} code executions`;",
+            "body": "<mwk_text>Use the code editor to manipulate saved JSON state for this app.</mwk_text>"
+        },
+        "__mwk_periodic_table": {
+            "name": "Periodic Table Explorer",
+            "emoji": "🧪",
+            "title": "Periodic Table Explorer",
+            "subtitle": "A sample interactive app built through the data format",
+            "theme": {
+                "accent": "#0f766e",
+                "surface": "#f5fffe",
+                "background": "#ecfdf5",
+                "text": "#134e4a",
+                "border": "#b5f5ec"
+            },
+            "styles": ".periodic-grid { grid-template-columns: repeat(18, minmax(36px, 1fr)); } .periodic-element { min-height: 48px; }",
+            "body": "<div class='periodic-grid'><button class='periodic-element' data-name='Hydrogen' data-info='Hydrogen is the lightest element and the most abundant in the universe.'>H</button><button class='periodic-element' data-name='Helium' data-info='Helium is a noble gas used in balloons and cooling systems.'>He</button><button class='periodic-element' data-name='Lithium' data-info='Lithium is used in batteries and medicine.'>Li</button><button class='periodic-element' data-name='Beryllium' data-info='Beryllium is lightweight and used in aerospace materials.'>Be</button><button class='periodic-element' data-name='Boron' data-info='Boron is used in glass and detergents.'>B</button><button class='periodic-element' data-name='Carbon' data-info='Carbon forms the backbone of organic chemistry.'>C</button><button class='periodic-element' data-name='Nitrogen' data-info='Nitrogen makes up most of Earths atmosphere.'>N</button><button class='periodic-element' data-name='Oxygen' data-info='Oxygen is essential for respiration.'>O</button><button class='periodic-element' data-name='Fluorine' data-info='Fluorine is the most reactive halogen.'>F</button><button class='periodic-element' data-name='Neon' data-info='Neon glows brightly in signs.'>Ne</button><button class='periodic-element' data-name='Sodium' data-info='Sodium is a soft reactive metal used in chemistry.'>Na</button><button class='periodic-element' data-name='Magnesium' data-info='Magnesium is lightweight and used in alloys.'>Mg</button><button class='periodic-element' data-name='Aluminum' data-info='Aluminum is corrosion-resistant and widely recycled.'>Al</button><button class='periodic-element' data-name='Silicon' data-info='Silicon powers electronics and solar cells.'>Si</button><button class='periodic-element' data-name='Phosphorus' data-info='Phosphorus is important for DNA and fertilizer.'>P</button><button class='periodic-element' data-name='Sulfur' data-info='Sulfur is used in vulcanized rubber and fertilizers.'>S</button><button class='periodic-element' data-name='Chlorine' data-info='Chlorine is used to disinfect water.'>Cl</button><button class='periodic-element' data-name='Argon' data-info='Argon is an inert gas used in light bulbs.'>Ar</button></div><div class='periodic-detail' id='periodic-detail'></div>"
+        }
+    }
+}
