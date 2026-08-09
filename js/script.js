@@ -1,4 +1,8 @@
-﻿/*
+// Copyright © 2026 GreatCoder1000. All Rights Reserved.
+// This source code may not be copied, modified, or redistributed
+// without permission.
+
+/*
  * Pinchly app loader and runtime utilities.
  *
  * This file is now modularized so each helper serves a single purpose.
