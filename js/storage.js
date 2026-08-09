@@ -1,3 +1,7 @@
+// Copyright © 2026 GreatCoder1000. All Rights Reserved.
+// This source code may not be copied, modified, or redistributed
+// without permission.
+
 import { getCurrentUser } from './auth.js';
 import { STORAGE_KEYS } from './auth.js';
 
