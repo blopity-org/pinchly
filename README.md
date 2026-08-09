@@ -1,5 +1,7 @@
 # Pinchly
 
+***NOTICE: Pinchly is still under development! Not all features may be present yet, and there may be bugs!***
+
 Pinchly is a modular app‑building environment that supports both no‑code creation and advanced coding through a built‑in JS terminal. Users can log in, create apps, store per‑app JSON data, and build interactive tools directly in the browser.
 
 ## Features
