@@ -1,3 +1,7 @@
+// Copyright © 2026 GreatCoder1000. All Rights Reserved.
+// This source code may not be copied, modified, or redistributed
+// without permission.
+
 import { query, renderHtml, createIcon, createListItems } from './utils.js';
 import { getCurrentUser, renderAuthControls } from './auth.js';
 import { getLocale } from './i18n.js';
