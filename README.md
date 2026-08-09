@@ -54,7 +54,7 @@ CODE_OF_CONDUCT.md
 ## Getting Started
 
 1. Clone the repo  
-2. Open `public/index.html`  
+2. Open `index.html`  
 3. Create an account  
 4. Build your first app  
 5. Use the terminal for advanced features
