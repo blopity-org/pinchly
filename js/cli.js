@@ -1,3 +1,7 @@
+// Copyright © 2026 GreatCoder1000. All Rights Reserved.
+// This source code may not be copied, modified, or redistributed
+// without permission.
+
 import { query } from './utils.js';
 import { loadAppData, saveAppData } from './storage.js';
 
