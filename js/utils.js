@@ -1,3 +1,7 @@
+// Copyright © 2026 GreatCoder1000. All Rights Reserved.
+// This source code may not be copied, modified, or redistributed
+// without permission.
+
 export const SELECTORS = {
     authBar: '#auth-bar',
     appContainer: '#app-container',
