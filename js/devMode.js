@@ -1,6 +1,6 @@
 (function () {
     const DEV_MODE = true;
-    const ACCESS_CODE = 'not-a-robot';
+    const ACCESS_CODE = 'blipblopblap';
     const SESSION_KEY = 'pinchly-dev-access';
 
     if (!DEV_MODE || sessionStorage.getItem(SESSION_KEY) === 'granted') return;
