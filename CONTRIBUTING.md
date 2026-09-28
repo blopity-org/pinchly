@@ -1,6 +1,6 @@
-# Contributing to Pinchly
+# Contributing to Blopity Pinch
 
-Thanks for your interest in contributing! Pinchly is designed to be modular, extensible, and friendly to both beginners and advanced developers.
+Thanks for your interest in contributing! Blopity Pinch is designed to be approachable for first-time makers and flexible enough for custom JavaScript tools.
 
 ## How to Contribute
 

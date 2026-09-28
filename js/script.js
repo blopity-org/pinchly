@@ -12,7 +12,7 @@ const PINCHLY_ACCOUNTS = {
     pinchi: {
         password: 'pinch123',
         displayName: 'Pinchi',
-        bio: 'Creator of the Pinchly platform — sign in to save apps and data locally.',
+        bio: 'Making small tools with a little personality for Blopity.',
     },
     demo: {
         password: 'demo',
@@ -130,7 +130,7 @@ function renderSignedInPanel() {
 
 function renderLoginForm() {
     return `
-        <form id="loginForm" class="login-form" aria-label="Sign in to Pinchly">
+        <form id="loginForm" class="login-form" aria-label="Sign in to Blopity Pinch">
             <label for="loginName">Username</label>
             <input id="loginName" name="loginName" type="text" placeholder="Username" autocomplete="username" required>
             <label for="loginPass">Password</label>
@@ -399,7 +399,7 @@ function bindCliControls(appId, appMwk) {
     appendCliLine(
         cliOutput,
         appMwk.cliIntro ||
-            'Welcome to the Pinchly CLI shell. Type help for available commands.',
+            'Welcome to the Blopity Pinch command line. Type help to get started.',
         'info'
     );
 
@@ -611,7 +611,7 @@ function loadFolder(folderMwk, appData) {
         `
         <div class="app-header">
             <h1>${escapeHtml(folderMwk.emoji || '📁')} ${escapeHtml(folderMwk.name)}</h1>
-            <p class="app-subtitle">Micro App Folder</p>
+            <p class="app-subtitle">A collection of small tools</p>
         </div>
         <a class="back-link" href="apps.html?app=${folderMwk.parent || '__mwk_root'}">Back</a>
         ${renderAppList(folderMwk.children, appData)}
@@ -626,8 +626,8 @@ function loadRoot(folderMwk, appData) {
         appCntr,
         `
         <div class="app-header">
-            <h1>Micro Web Kit</h1>
-            <p class="app-subtitle">Build tiny utility apps, calculators, and interactive experiences.</p>
+            <h1>Blopity Pinch</h1>
+            <p class="app-subtitle">Small tools, useful experiments, and things that just work.</p>
         </div>
         ${renderAppList(folderMwk.children, appData)}
     `
@@ -766,7 +766,7 @@ function runCommandWithRuntime(command, runtime) {
     const parts = command.trim().split(/\s+/);
     const handler = MWK_COMMAND_HANDLERS[parts[0]];
     if (!handler) {
-        throw new Error('Unexpected MWK Command: ' + command);
+        throw new Error('Unexpected command: ' + command);
     }
     handler(parts, runtime);
 }
@@ -941,7 +941,7 @@ function loadFolder(folderMwk, appData) {
     const appCntr = document.getElementById('app-container');
     appCntr.innerHTML = '';
     appCntr.className = 'app-shell';
-    appCntr.innerHTML += `<div class="app-header"><h1>${folderMwk.emoji || '📁'} ${folderMwk.name}</h1><p class="app-subtitle">Micro App Folder</p></div>`;
+    appCntr.innerHTML += `<div class="app-header"><h1>${folderMwk.emoji || '📁'} ${folderMwk.name}</h1><p class="app-subtitle">A collection of small tools</p></div>`;
     appCntr.innerHTML += `<a class="back-link" href="apps.html?app=${folderMwk.parent || '__mwk_root'}">Back</a>`;
     appCntr.innerHTML += '<ul class="app-ul">';
 
@@ -958,7 +958,7 @@ function loadRoot(folderMwk, appData) {
     appCntr.innerHTML = '';
     appCntr.className = 'app-shell';
     appCntr.innerHTML +=
-        '<div class="app-header"><h1>Micro Web Kit</h1><p class="app-subtitle">Build tiny utility apps, calculators, and interactive experiences.</p></div>';
+        '<div class="app-header"><h1>Blopity Pinch</h1><p class="app-subtitle">Small tools, useful experiments, and things that just work.</p></div>';
     appCntr.innerHTML += '<ul class="app-ul">';
 
     folderMwk.children.forEach((childApp) => {
@@ -1117,7 +1117,7 @@ function runCommandWithRuntime(command, runtime) {
         return;
     }
 
-    throw new Error('Unexpected MWK Command: ' + commandName);
+    throw new Error('Unexpected command: ' + commandName);
 }
 
 function mwkSubmitButtonClicked(appMwk) {

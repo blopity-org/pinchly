@@ -14,7 +14,7 @@ const appShellSelectors = {
 
 export function renderAppShell({ pageTitle, apps }) {
     const loggedIn = Boolean(getCurrentUser());
-    const titleText = pageTitle || 'Pinchly Apps';
+    const titleText = pageTitle || 'Blopity Pinch Apps';
     renderHtml(query(appShellSelectors.pageTitle), titleText);
 
     const items = apps

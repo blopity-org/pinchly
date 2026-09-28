@@ -9,7 +9,7 @@ const FALLBACK_LOCALE = 'en';
 
 const TRANSLATIONS = {
     en: {
-        login_title: 'Sign in to Pinchly',
+        login_title: 'Sign in to Blopity Pinch',
         login_username: 'Username',
         login_password: 'Password',
         login_button: 'Login',
@@ -31,15 +31,15 @@ const TRANSLATIONS = {
         cli_input_label: 'CLI command input',
         code_output_placeholder: 'Code output appears here.',
         footer_language: 'Language',
-        footer_crafted: 'Crafted with Pinchly experimental tools.',
-        inbox_title: 'Pinchly Inbox',
+        footer_crafted: 'Made with Blopity Pinch.',
+        inbox_title: 'Blopity Pinch Inbox',
         inbox_description:
             'Notifications about social activity, updates, and programming news.',
         inbox_empty: 'No notifications yet. Check back soon.',
         mark_all_read: 'Mark all read',
     },
     es: {
-        login_title: 'Inicia sesión en Pinchly',
+        login_title: 'Inicia sesión en Blopity Pinch',
         login_username: 'Usuario',
         login_password: 'Contraseña',
         login_button: 'Ingresar',
@@ -60,8 +60,8 @@ const TRANSLATIONS = {
         cli_input_label: 'Entrada de comando CLI',
         code_output_placeholder: 'La salida del código aparece aquí.',
         footer_language: 'Idioma',
-        footer_crafted: 'Creado con herramientas experimentales de Pinchly.',
-        inbox_title: 'Bandeja de Pinchly',
+        footer_crafted: 'Hecho con Blopity Pinch.',
+        inbox_title: 'Bandeja de Blopity Pinch',
         inbox_description:
             'Notificaciones de actividad social, actualizaciones y noticias de programación.',
         inbox_empty: 'Aún no hay notificaciones. Vuelve pronto.',

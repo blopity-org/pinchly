@@ -1,6 +1,6 @@
-# Pinchly Code of Conduct
+# Blopity Pinch Code of Conduct
 
-Pinchly is an inclusive community. All contributors must follow these principles:
+Blopity Pinch is an inclusive community. All contributors must follow these principles:
 
 - Be respectful
 - No harassment or discrimination

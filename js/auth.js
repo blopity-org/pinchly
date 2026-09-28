@@ -15,7 +15,7 @@ export const PINCHLY_ACCOUNTS = {
     pinchi: {
         password: 'pinch123',
         displayName: 'Pinchi',
-        bio: 'Creator of the Pinchly platform — sign in to save apps and data locally.',
+        bio: 'Making small tools with a little personality for Blopity.',
     },
     demo: {
         password: 'demo',
@@ -79,7 +79,7 @@ function renderSignedInPanel() {
 
 function renderLoginForm() {
     return `
-        <form id="loginForm" class="login-form" aria-label="Sign in to Pinchly">
+        <form id="loginForm" class="login-form" aria-label="Sign in to Blopity Pinch">
             <label for="loginName">Username</label>
             <input id="loginName" name="loginName" type="text" placeholder="Username" autocomplete="username" required>
             <label for="loginPass">Password</label>

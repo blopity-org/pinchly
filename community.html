@@ -8,7 +8,7 @@
 <html lang="en">
 
 <head>
-    <title>Micro Web Kit</title>
+    <title>Community | Blopity Pinch</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -16,18 +16,18 @@
         rel="stylesheet">
     <script src="https://kit.fontawesome.com/965799bb38.js" crossorigin="anonymous"></script>
     <link href="style.css" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="./media/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="./media/blopity-pinch.svg">
 </head>
 
 <body>
     <div class="header">
-        <h1>Pinchly</h1>
+        <h1>Blopity Pinch</h1>
         <h2>Community</h2>
-        <p><em>Pinch in</em> together!</p>
+        <p>Small tools, good company.</p>
     </div>
     <div id="navbar">
         <a href="index.html">
-            Pinchly
+            Blopity Pinch
         </a>
         <a href="builder.html">
             Create
@@ -59,8 +59,8 @@
             "pinchi": {
                 "name": "Pinchi",
                 "github": "GreatCoder1000",
-                "bio": "Creator of the Pinchly platform, building tiny apps with personality.",
-                "apps": ["Pinchly CLI Shell", "JSON Journal", "JS Code Lab"],
+                "bio": "Making small tools with a little personality for Blopity.",
+                "apps": ["Blopity Pinch CLI", "JSON Journal", "JS Code Lab"],
                 "status": "Always experimenting with new app formats and social features."
             },
             "demo": {
@@ -86,7 +86,7 @@
         if (!user) {
             appContainer.innerHTML = `
                 <h2>Community</h2>
-                <p class="mwk-tip">Explore creators, see their apps, and jump into the Pinchly network.</p>
+                <p class="mwk-tip">Meet the people making useful little things around Blopity.</p>
                 <ul class="app-ul">
                     ${Object.keys(usersData)
                     .map(

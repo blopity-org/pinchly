@@ -106,7 +106,7 @@ export function runCommandWithRuntime(command, runtime) {
     const parts = command.trim().split(/\s+/);
     const handler = MWK_COMMAND_HANDLERS[parts[0]];
     if (!handler) {
-        throw new Error('Unexpected MWK Command: ' + command);
+        throw new Error('Unexpected command: ' + command);
     }
     handler(parts, runtime);
 }

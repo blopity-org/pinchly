@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Micro Web Kit Builder</title>
+    <title>Make an app | Blopity Pinch</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -18,18 +18,18 @@
         rel="stylesheet">
     <script src="https://kit.fontawesome.com/965799bb38.js" crossorigin="anonymous"></script>
     <link href="style.css" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="./media/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="./media/blopity-pinch.svg">
 </head>
 
 <body>
     <div class="header">
-        <h1>Pinchly</h1>
+        <h1>Blopity Pinch</h1>
         <h2>App Builder</h2>
-        <p>Start building your dream app here!</p>
+        <p>Make a small tool that just works.</p>
     </div>
     <div id="navbar">
         <a href="index.html">
-            Pinchly
+            Blopity Pinch
         </a>
         <a class="active" href="builder.html">
             Create
@@ -52,7 +52,7 @@
                 <h1>Create a new app without writing code</h1>
             </div>
             <nav class="topbar-nav">
-                <a href="index.html">Pinchly</a>
+                <a href="index.html">Blopity Pinch</a>
                 <a href="apps.html">Apps</a>
                 <a href="builder.html">App Builder</a>
             </nav>
@@ -63,8 +63,7 @@
                 <div class="container builder-shell">
                     <div class="mwk-text">
                         <p>Fill in the form below, then copy the generated JSON block into the apps section of your
-                            data.json file. This makes it easy to create calculators, style demos, and even periodic
-                            table-style experiences.</p>
+                            data.json file. Make a calculator, a tiny reference tool, or something a little odd.</p>
                     </div>
 
                     <div class="builder-grid">
@@ -91,11 +90,11 @@
                             </div>
                             <div class="mwk-field">
                                 <label for="appSubtitle">Subtitle</label>
-                                <input id="appSubtitle" value="A simple app built with Micro Web Kit">
+                                <input id="appSubtitle" value="A little tool that just works">
                             </div>
                             <div class="mwk-field">
                                 <label for="accentColor">Accent color</label>
-                                <input id="accentColor" type="color" value="#5b6cff">
+                                <input id="accentColor" type="color" value="#167c68">
                             </div>
                             <div class="mwk-field">
                                 <label for="bodyHtml">Body HTML</label>
@@ -161,13 +160,13 @@
                 name: appTitle.value || 'My app',
                 emoji: appEmoji.value || '🧩',
                 title: appTitle.value || 'My app',
-                subtitle: appSubtitle.value || 'Built with Micro Web Kit',
+                subtitle: appSubtitle.value || 'Made with Blopity Pinch',
                 theme: {
                     accent: accentColor.value,
-                    surface: '#ffffffee',
-                    background: '#f7f8ff',
-                    text: '#132238',
-                    border: '#dfe7f0'
+                    surface: '#ffffff',
+                    background: '#f7f7f4',
+                    text: '#20211f',
+                    border: '#e5e5df'
                 },
                 body: bodyHtml.value,
                 styles: styleCss.value || ''

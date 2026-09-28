@@ -1,7 +1,7 @@
 {
     "folders": {
         "__mwk_util": {
-            "name": "MWK Utilities",
+            "name": "Useful tools",
             "emoji": "⚙️",
             "parent": "__mwk_root",
             "children": [
@@ -20,7 +20,7 @@
             ]
         },
         "__mwk_root": {
-            "name": "MWK Root",
+            "name": "Explore Blopity Pinch",
             "parent": null,
             "children": [
                 "__mwk_util",
@@ -29,7 +29,7 @@
             ]
         },
         "__mwk_studio": {
-            "name": "Pinchly Studio",
+            "name": "Blopity Pinch Studio",
             "emoji": "🛠️",
             "parent": "__mwk_root",
             "children": [
@@ -41,21 +41,21 @@
     },
     "apps": {
         "__mwk_hello": {
-            "name": "MWK Hello",
+            "name": "A small hello",
             "emoji": "👋",
             "title": "Hello!",
             "subtitle": "How are you doing today?",
             "body": "<mwk_text>This app is so cool.</mwk_text>"
         },
         "__mwk_404": {
-            "name": "MWK Error 404",
+            "name": "Not found",
             "emoji": "😣",
             "title": "Oh no...",
             "subtitle": "ERROR: 404 FILE NOT FOUND",
             "body": "<mwk_text>Sorry, but we can't find your amazing app yet.</mwk_text>"
         },
         "__mwk_calculator": {
-            "name": "MWK Calculator",
+            "name": "Calculator",
             "title": "Calculator",
             "subtitle": "Try the built-in math engine",
             "body": "<mwk_text>Enter two numbers and press submit.</mwk_text><mwk_input1><mwk_input2><mwk_submit label='Add numbers'></mwk_submit>",
@@ -116,16 +116,16 @@
         "__mwk_cli_shell": {
             "name": "CLI Shell",
             "emoji": "💻",
-            "title": "Pinchly CLI Shell",
+            "title": "Blopity Pinch CLI",
             "subtitle": "Run workspace commands and inspect app storage",
             "cli": true,
             "data": {
                 "history": [],
                 "notes": [
-                    "Welcome to Pinchly CLI. Type help to begin."
+                    "Welcome to the Blopity Pinch command line. Type help to get started."
                 ]
             },
-            "cliIntro": "Welcome to the Pinchly CLI shell. Type help for available commands. Your saved app state is loaded per account.",
+            "cliIntro": "Welcome to the Blopity Pinch command line. Type help for available commands. Your saved app state is loaded per account.",
             "body": "<mwk_text>Interact with this app through the terminal below. Use <code>get</code>, <code>set</code>, <code>json</code>, and <code>clear</code> to explore stored state.</mwk_text>"
         },
         "__mwk_json_journal": {

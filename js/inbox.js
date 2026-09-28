@@ -37,7 +37,7 @@ const NOTIFICATIONS = [
     {
         id: 'news-02',
         type: 'news',
-        title: 'Pinchly update',
+        title: 'Blopity Pinch update',
         message:
             'App thumbnails, Inbox feeds, and language selector are now live.',
         subtext: 'The platform is getting more polished and experimental.',
@@ -69,7 +69,7 @@ export function renderInboxPage() {
         <div class="inbox-hero">
             <div>
                 <span class="eyebrow">Inbox</span>
-                <h1>Pinchly notifications</h1>
+                <h1>Blopity Pinch notifications</h1>
                 <p>Social actions, platform updates, and programming news all land here.</p>
             </div>
             <button class="btn-secondary" id="markAllReadBtn">Mark all read</button>

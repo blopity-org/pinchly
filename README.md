@@ -1,64 +1,36 @@
-# Pinchly
+# Blopity Pinch
 
-Pinchly is a modular app‑building environment that supports both no‑code creation and advanced coding through a built‑in JS terminal. Users can log in, create apps, store per‑app JSON data, and build interactive tools directly in the browser.
+**Things that just work.** Blopity Pinch is Blopity's small, useful, slightly weird place to make browser apps. Start with a visual builder, then get into the details with JavaScript, a terminal, and per-app JSON storage.
 
-## Features
+## What it does
 
-- **User Authentication**
-  - Login / logout
-  - Per‑user app ownership
-  - Secure local or server‑backed sessions
+- Explore small interactive apps and examples.
+- Make an app with the browser-based builder or edit its generated JSON.
+- Run JavaScript and terminal commands inside an app.
+- Save app data in the current browser after signing in; this demo does not use a server-backed account system.
 
-- **App System**
-  - Create apps with or without coding
-  - Each app has its own JSON datastore
-  - Supports UI‑based editing or terminal‑based coding
-  - Sandbox for simplified JavaScript or full JS
-
-- **JS Terminal**
-  - Run commands inside the browser
-  - Access app data
-  - Extend app functionality
-  - Build custom logic and tools
-
-- **Responsive UI**
-  - Mobile‑friendly layout
-  - Clean, modern design
-  - Flexible component system
-
-## Project Structure
+## Files at a glance
 
 ```
-/pinchly
-/apps
-/example-app
-app.json
-app.js
-ui.html
-/core
-auth.js
-datastore.js
-terminal.js
-ui.js
-/public
-index.html
-styles.css
-pinchly.js
-README.md
-LICENSE
-CONTRIBUTING.md
-CODE_OF_CONDUCT.md
+index.html          # Blopity Pinch home
+apps.html           # App library
+builder.html        # App builder
+community.html      # Creator profiles
+inbox.html          # Notifications
+data.json           # Starter apps and folders
+style.css           # Shared interface styles
+js/                 # App runtime and page modules
+media/              # Site assets
 ```
 
 
 ## Getting Started
 
-1. Clone the repo  
-2. Open `index.html`  
-3. Create an account  
-4. Build your first app  
-5. Use the terminal for advanced features
+1. Clone the repository.
+2. Open `index.html` in a browser.
+3. Explore the examples or open **Create** to build an app.
+4. Sign in to save app data in this browser. Demo accounts: `pinchi` / `pinch123` or `demo` / `demo`.
 
-## Vision
+## Migration note
 
-Pinchly aims to be a hybrid no‑code/code platform where beginners can build apps visually, and advanced users can extend them with JavaScript — all inside one unified environment.
+Blopity Pinch is the display name. The existing `pinchly` storage keys and runtime identifiers are intentionally retained so existing local data and integrations continue to work.

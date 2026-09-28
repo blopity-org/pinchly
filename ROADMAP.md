@@ -1,4 +1,4 @@
-# Pinchly Roadmap
+# Blopity Pinch Roadmap
 
 ## Phase 1 — Core Platform
 - Login/logout

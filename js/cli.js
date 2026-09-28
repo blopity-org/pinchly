@@ -117,7 +117,7 @@ export function bindCliControls(appId, appMwk) {
     appendCliLine(
         cliOutput,
         appMwk.cliIntro ||
-            'Welcome to the Pinchly CLI shell. Type help for available commands.',
+            'Welcome to the Blopity Pinch command line. Type help to get started.',
         'info'
     );
 
