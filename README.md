@@ -1,6 +1,12 @@
 # Blopity Pinch
 
+<<<<<<< HEAD
 **Things that just work.** Blopity Pinch is Blopity's small, useful, slightly weird place to make browser apps. Start with a visual builder, then get into the details with JavaScript, a terminal, and per-app JSON storage.
+=======
+***NOTICE: Pinchly is still under development! Not all features may be present yet, and there may be bugs!***
+
+Pinchly is a modular app‑building environment that supports both no‑code creation and advanced coding through a built‑in JS terminal. Users can log in, create apps, store per‑app JSON data, and build interactive tools directly in the browser.
+>>>>>>> 90e786a34bb20dd012cf472d42671ae3ed4e3df4
 
 ## What it does
 
@@ -33,4 +39,8 @@ media/              # Site assets
 
 ## Migration note
 
+<<<<<<< HEAD
 Blopity Pinch is the display name. The existing `pinchly` storage keys and runtime identifiers are intentionally retained so existing local data and integrations continue to work.
+=======
+Pinchly aims to be a hybrid no‑code/code platform where beginners can build apps visually, and advanced users can extend them with JavaScript — all inside one unified environment.
+>>>>>>> 90e786a34bb20dd012cf472d42671ae3ed4e3df4

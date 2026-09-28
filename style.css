@@ -579,3 +579,239 @@ a {
 .inbox-item:hover {
     background-color: #fff8dc;
 }
+
+.theme-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    color: #454740;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.theme-control label {
+    margin: 0;
+    white-space: nowrap;
+}
+
+.theme-control select {
+    width: auto;
+    min-width: 126px;
+    padding: 8px 32px 8px 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+:where(a, button, input, textarea, select):focus-visible {
+    outline: 3px solid #16836c;
+    outline-offset: 2px;
+}
+
+html[data-theme="dark"] {
+    color-scheme: dark;
+    background: #151a17;
+    color: #e8ece7;
+}
+
+html[data-theme="dark"] body {
+    background: #151a17;
+    color: #e8ece7;
+}
+
+html[data-theme="dark"] .header,
+html[data-theme="dark"] .auth-bar,
+html[data-theme="dark"] .topbar,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .app-shell,
+html[data-theme="dark"] .mwk-section,
+html[data-theme="dark"] .mwk-card-panel,
+html[data-theme="dark"] .mwk-output,
+html[data-theme="dark"] .app-ul a,
+html[data-theme="dark"] .periodic-element,
+html[data-theme="dark"] .periodic-detail,
+html[data-theme="dark"] .builder-panel,
+html[data-theme="dark"] .inbox-item {
+    background-color: #202723;
+    border-color: #3b4941;
+    color: #e8ece7;
+}
+
+html[data-theme="dark"] #navbar {
+    background: rgba(27, 34, 30, 0.97);
+    border-color: #3b4941;
+}
+
+html[data-theme="dark"] #navbar a,
+html[data-theme="dark"] .topbar-nav a,
+html[data-theme="dark"] .back-link,
+html[data-theme="dark"] a {
+    color: #d8e5dc;
+}
+
+html[data-theme="dark"] #navbar a:hover,
+html[data-theme="dark"] #navbar a.active,
+html[data-theme="dark"] .btn-primary {
+    background-color: #f1cf5a;
+    color: #202019;
+}
+
+html[data-theme="dark"] .topbar-nav a,
+html[data-theme="dark"] .back-link,
+html[data-theme="dark"] .btn-secondary {
+    background-color: #303b34;
+    color: #e8ece7;
+}
+
+html[data-theme="dark"] .topbar-nav a:hover,
+html[data-theme="dark"] .back-link:hover,
+html[data-theme="dark"] .btn-secondary:hover,
+html[data-theme="dark"] .app-ul a:hover,
+html[data-theme="dark"] .periodic-element:hover,
+html[data-theme="dark"] .periodic-detail:hover,
+html[data-theme="dark"] .inbox-item:hover {
+    background-color: #35463b;
+}
+
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] label,
+html[data-theme="dark"] .header h1,
+html[data-theme="dark"] .header h2,
+html[data-theme="dark"] .theme-control {
+    color: #e8ece7;
+}
+
+html[data-theme="dark"] .eyebrow,
+html[data-theme="dark"] .auth-status {
+    color: #7dd3ad;
+}
+
+html[data-theme="dark"] .app-subtitle,
+html[data-theme="dark"] .auth-message,
+html[data-theme="dark"] .mwk-tip {
+    color: #b7c3ba;
+}
+
+html[data-theme="dark"] input,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select {
+    background-color: #171e1a;
+    border-color: #4b5b50;
+    color: #e8ece7;
+}
+
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder {
+    color: #a0afa5;
+}
+
+html[data-theme="dark"] :where(a, button, input, textarea, select):focus-visible {
+    outline-color: #7dd3ad;
+}
+
+html[data-theme="classic"] {
+    color-scheme: light;
+    background: #efe4cb;
+    color: #342b22;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+html[data-theme="classic"] body {
+    background: #efe4cb;
+    color: #342b22;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+html[data-theme="classic"] .header,
+html[data-theme="classic"] .auth-bar,
+html[data-theme="classic"] .topbar,
+html[data-theme="classic"] .card,
+html[data-theme="classic"] .app-shell,
+html[data-theme="classic"] .mwk-section,
+html[data-theme="classic"] .mwk-card-panel,
+html[data-theme="classic"] .mwk-output,
+html[data-theme="classic"] .app-ul a,
+html[data-theme="classic"] .periodic-element,
+html[data-theme="classic"] .periodic-detail,
+html[data-theme="classic"] .builder-panel,
+html[data-theme="classic"] .inbox-item {
+    background-color: #fff8e9;
+    border-color: #c9b58f;
+    color: #342b22;
+}
+
+html[data-theme="classic"] #navbar {
+    background: rgba(255, 248, 233, 0.97);
+    border-color: #c9b58f;
+}
+
+html[data-theme="classic"] #navbar a,
+html[data-theme="classic"] .topbar-nav a,
+html[data-theme="classic"] .back-link,
+html[data-theme="classic"] a {
+    color: #63382b;
+}
+
+html[data-theme="classic"] #navbar a:hover,
+html[data-theme="classic"] #navbar a.active,
+html[data-theme="classic"] .btn-primary {
+    background-color: #a84732;
+    color: #fff8e9;
+}
+
+html[data-theme="classic"] .topbar-nav a,
+html[data-theme="classic"] .back-link,
+html[data-theme="classic"] .btn-secondary {
+    background-color: #eee0c4;
+    color: #342b22;
+}
+
+html[data-theme="classic"] .topbar-nav a:hover,
+html[data-theme="classic"] .back-link:hover,
+html[data-theme="classic"] .btn-secondary:hover,
+html[data-theme="classic"] .app-ul a:hover,
+html[data-theme="classic"] .periodic-element:hover,
+html[data-theme="classic"] .periodic-detail:hover,
+html[data-theme="classic"] .inbox-item:hover {
+    background-color: #f1dfb8;
+}
+
+html[data-theme="classic"] h1,
+html[data-theme="classic"] h2,
+html[data-theme="classic"] label,
+html[data-theme="classic"] .header h1,
+html[data-theme="classic"] .header h2,
+html[data-theme="classic"] .theme-control {
+    color: #342b22;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+html[data-theme="classic"] .eyebrow,
+html[data-theme="classic"] .auth-status {
+    color: #9b4935;
+}
+
+html[data-theme="classic"] .app-subtitle,
+html[data-theme="classic"] .auth-message,
+html[data-theme="classic"] .mwk-tip {
+    color: #685743;
+}
+
+html[data-theme="classic"] input,
+html[data-theme="classic"] textarea,
+html[data-theme="classic"] select {
+    background-color: #fffdf7;
+    border-color: #c9b58f;
+    color: #342b22;
+}
+
+html[data-theme="classic"] :where(a, button, input, textarea, select):focus-visible {
+    outline-color: #a84732;
+}
+
+@media (max-width: 640px) {
+    .theme-control {
+        margin: 4px auto 0;
+    }
+}
