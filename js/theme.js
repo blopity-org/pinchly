@@ -25,7 +25,10 @@
             <label for="siteTheme">Theme</label>
             <select id="siteTheme" aria-label="Choose color theme">
                 ${Object.entries(THEMES)
-                    .map(([value, label]) => `<option value="${value}">${label}</option>`)
+                    .map(
+                        ([value, label]) =>
+                            `<option value="${value}">${label}</option>`
+                    )
                     .join('')}
             </select>
         `;
@@ -37,7 +40,9 @@
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', addThemeControl, { once: true });
+        document.addEventListener('DOMContentLoaded', addThemeControl, {
+            once: true,
+        });
     } else {
         addThemeControl();
     }

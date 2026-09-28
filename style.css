@@ -547,9 +547,12 @@ button {
 }
 
 .no-bullets {
-  list-style: none;   /* removes the bullets */
-  padding-left: 0;    /* removes the indent */
-  margin-left: 0;     /* optional: removes margin if the browser adds one */
+    list-style: none;
+    /* removes the bullets */
+    padding-left: 0;
+    /* removes the indent */
+    margin-left: 0;
+    /* optional: removes margin if the browser adds one */
 }
 
 .inbox-item {
@@ -570,12 +573,15 @@ a {
     padding: 4px;
     margin: 2px;
 }
+
 .inbox-item-main {
     padding: 4px;
 }
+
 .inbox-item-footer {
     font-size: 0.6em;
 }
+
 .inbox-item:hover {
     background-color: #fff8dc;
 }
