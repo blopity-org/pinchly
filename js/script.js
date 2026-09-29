@@ -8,21 +8,8 @@
  * This file is now modularized so each helper serves a single purpose.
  */
 
-const PINCHLY_ACCOUNTS = {
-    pinchi: {
-        password: 'pinch123',
-        displayName: 'Pinchi',
-        bio: 'Making small tools with a little personality for Blopity.',
-    },
-    demo: {
-        password: 'demo',
-        displayName: 'Demo User',
-        bio: 'A sample account to explore app storage, CLI and code editor workflows.',
-    },
-};
-
 const STORAGE_KEYS = {
-    auth: 'pinchly-current-user',
+    auth: 'pinchly-firebase-user',
     appPrefix: 'pinchly:app:',
 };
 
@@ -34,8 +21,6 @@ const SELECTORS = {
 
 const ICONS = {
     user: 'fa-user',
-    signIn: 'fa-right-to-bracket',
-    signOut: 'fa-right-from-bracket',
     terminal: 'fa-terminal',
     code: 'fa-code',
     database: 'fa-database',
@@ -84,100 +69,8 @@ function getCurrentUser() {
     return localStorage.getItem(STORAGE_KEYS.auth);
 }
 
-function lookupAccount(username) {
-    return PINCHLY_ACCOUNTS[
-        String(username || '')
-            .trim()
-            .toLowerCase()
-    ];
-}
-
-function setCurrentUser(username) {
-    localStorage.setItem(STORAGE_KEYS.auth, username);
-}
-
-function clearCurrentUser() {
-    localStorage.removeItem(STORAGE_KEYS.auth);
-}
-
 function isUserSignedIn() {
     return Boolean(getCurrentUser());
-}
-
-function renderAuthBar() {
-    const authBar = query(SELECTORS.authBar);
-    if (!authBar) return;
-
-    renderHtml(
-        authBar,
-        isUserSignedIn() ? renderSignedInPanel() : renderLoginForm()
-    );
-    bindAuthEvents();
-}
-
-function renderSignedInPanel() {
-    return `
-        <div class="auth-panel">
-            <span class="auth-message">
-                ${createIcon(ICONS.user, 'Signed in')} <strong>@${escapeHtml(getCurrentUser())}</strong>
-            </span>
-            <button class="btn-secondary auth-button" id="logoutBtn" type="button">
-                ${createIcon(ICONS.signOut, 'Log out')} Logout
-            </button>
-        </div>
-    `;
-}
-
-function renderLoginForm() {
-    return `
-        <form id="loginForm" class="login-form" aria-label="Sign in to Blopity Pinch">
-            <label for="loginName">Username</label>
-            <input id="loginName" name="loginName" type="text" placeholder="Username" autocomplete="username" required>
-            <label for="loginPass">Password</label>
-            <input id="loginPass" name="loginPass" type="password" placeholder="Password" autocomplete="current-password" required>
-            <button class="btn-primary auth-button" type="submit">
-                ${createIcon(ICONS.signIn, 'Sign in')} Login
-            </button>
-            <span id="authStatus" class="auth-status" role="status"></span>
-        </form>
-    `;
-}
-
-function bindAuthEvents() {
-    const logoutBtn = query('#logoutBtn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-            clearCurrentUser();
-            renderAuthBar();
-        });
-    }
-
-    const loginForm = query('#loginForm');
-    if (loginForm) {
-        loginForm.addEventListener('submit', handleLoginSubmit);
-    }
-}
-
-function handleLoginSubmit(event) {
-    event.preventDefault();
-    const username = query('#loginName')?.value;
-    const password = query('#loginPass')?.value;
-    const account = lookupAccount(username);
-    const success = Boolean(
-        account && account.password === String(password || '')
-    );
-
-    if (success) {
-        setCurrentUser(String(username).trim().toLowerCase());
-        renderAuthBar();
-    }
-
-    const status = query(SELECTORS.authStatus);
-    if (status) {
-        status.textContent = success
-            ? 'Welcome back!'
-            : 'Login failed. Try pinchi/demo.';
-    }
 }
 
 function getAppStorageKey(appId) {
@@ -217,8 +110,9 @@ function createAppInfoPanel() {
     if (!isUserSignedIn()) {
         return `<p class="mwk-tip">${createIcon(ICONS.info, 'Tip')} Sign in to save app state and continue your work later.</p>`;
     }
-    const account = lookupAccount(getCurrentUser());
-    return `<p class="mwk-tip">${createIcon(ICONS.user, 'Account')} Welcome back, ${escapeHtml(account.displayName)}. Your saved data is available on this device.</p>`;
+    const accountLabel =
+        localStorage.getItem('pinchly-current-user-label') || 'your account';
+    return `<p class="mwk-tip">${createIcon(ICONS.user, 'Account')} Welcome back, ${escapeHtml(accountLabel)}. Your saved data is available on this device.</p>`;
 }
 
 function createAppHeader(title, subtitle) {
@@ -830,10 +724,9 @@ function afterLoad(appData) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', renderAuthBar);
-
 if (query(SELECTORS.appContainer)) {
     fetchAppData();
+    window.addEventListener('pinchly-auth-change', fetchAppData);
 }
 
 function appendCliLine(outputElement, text, type = 'output') {

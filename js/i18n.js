@@ -10,12 +10,12 @@ const FALLBACK_LOCALE = 'en';
 const TRANSLATIONS = {
     en: {
         login_title: 'Sign in to Blopity Pinch',
-        login_username: 'Username',
+        login_username: 'Email',
         login_password: 'Password',
         login_button: 'Login',
         logout_button: 'Logout',
         welcome_back: 'Welcome back!',
-        login_failed: 'Login failed. Try pinchi/demo.',
+        login_failed: 'Sign-in failed. Check your email and password.',
         app_json_data: 'App JSON Data',
         save_app_data: 'Save app data',
         reset_preview: 'Reset preview',
@@ -40,12 +40,13 @@ const TRANSLATIONS = {
     },
     es: {
         login_title: 'Inicia sesión en Blopity Pinch',
-        login_username: 'Usuario',
+        login_username: 'Correo electrónico',
         login_password: 'Contraseña',
         login_button: 'Ingresar',
         logout_button: 'Cerrar sesión',
         welcome_back: '¡Bienvenido de nuevo!',
-        login_failed: 'Error de inicio de sesión. Prueba pinchi/demo.',
+        login_failed:
+            'Error de inicio de sesión. Revisa el correo y la contraseña.',
         app_json_data: 'Datos JSON de la app',
         save_app_data: 'Guardar datos',
         reset_preview: 'Restablecer vista previa',

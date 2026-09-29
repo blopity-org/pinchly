@@ -1,115 +1,276 @@
-// Copyright © 2026 GreatCoder1000. All Rights Reserved.
-// This source code may not be copied, modified, or redistributed
-// without permission.
-
+import { escapeHtml } from './utils.js';
 import {
+    addDoc,
+    auth,
+    collection,
+    db,
+    doc,
+    firebaseConfigured,
+    limit,
+    onAuthStateChanged,
+    onSnapshot,
+    orderBy,
     query,
-    renderHtml,
-    createIcon,
-    escapeHtml,
-    SELECTORS,
-    ICONS,
-} from './utils.js';
-import { getCurrentUser } from './auth.js';
+    serverTimestamp,
+    updateDoc,
+    where,
+} from './firebase.js';
 
-const INBOX_KEY = 'pinchly-inbox-read';
+const inboxContainer = document.querySelector('#inbox-container');
+let stopListening;
 
-const NOTIFICATIONS = [
-    {
-        id: 'social-01',
-        type: 'social',
-        title: 'New follower',
-        message: '@pinchi started following you.',
-        subtext: 'Your network grows stronger.',
-        badge: 'Social',
-        time: '2m ago',
-    },
-    {
-        id: 'news-01',
-        type: 'news',
-        title: 'Python 3.14 release',
-        message:
-            'Python 3.14 is now out with new async and string improvements.',
-        subtext: 'Catch the latest programming news.',
-        badge: 'News',
-        time: 'Today',
-    },
-    {
-        id: 'news-02',
-        type: 'news',
-        title: 'Blopity Pinch update',
-        message:
-            'App thumbnails, Inbox feeds, and language selector are now live.',
-        subtext: 'The platform is getting more polished and experimental.',
-        badge: 'Update',
-        time: 'Just now',
-    },
-];
-
-function getReadIds() {
-    const raw = localStorage.getItem(INBOX_KEY);
-    if (!raw) return [];
-    try {
-        return JSON.parse(raw);
-    } catch {
-        return [];
-    }
-}
-
-function setReadIds(ids) {
-    localStorage.setItem(INBOX_KEY, JSON.stringify(ids));
-}
-
-export function renderInboxPage() {
-    const inboxContainer = query(SELECTORS.inboxContainer);
-    if (!inboxContainer) return;
-
-    const hasUser = Boolean(getCurrentUser());
-    const content = `
-        <div class="inbox-hero">
-            <div>
-                <span class="eyebrow">Inbox</span>
-                <h1>Blopity Pinch notifications</h1>
-                <p>Social actions, platform updates, and programming news all land here.</p>
-            </div>
-            <button class="btn-secondary" id="markAllReadBtn">Mark all read</button>
-        </div>
-        <div class="inbox-grid">
-            ${renderInboxCards()}
-        </div>
-        <div class="mwk-tip inbox-help">
-            ${hasUser ? 'Signed in actions appear in your account feed.' : 'Sign in to enable deeper notifications and saved inbox state.'}
-        </div>
-    `;
-
-    renderHtml(inboxContainer, content);
-    const markAllRead = query('#markAllReadBtn');
-    if (markAllRead) {
-        markAllRead.addEventListener('click', () => {
-            setReadIds(NOTIFICATIONS.map((item) => item.id));
-            renderInboxPage();
+if (inboxContainer) {
+    if (!firebaseConfigured) {
+        showMessage(
+            'Connect Firebase to enable your inbox. Follow the setup steps in NOTES.md.',
+            'setup'
+        );
+    } else {
+        onAuthStateChanged(auth, (user) => {
+            stopListening?.();
+            stopListening = null;
+            if (!user) {
+                showSignInPrompt();
+                return;
+            }
+            renderInbox(user);
+            listenForMessages(user);
         });
     }
 }
 
-function renderInboxCards() {
-    const readIds = getReadIds();
-    return NOTIFICATIONS.map((item) => {
-        const isRead = readIds.includes(item.id);
-        return `
-            <article class="inbox-card ${isRead ? 'read' : 'unread'}">
+function showMessage(message, kind = '') {
+    const messages = inboxContainer.querySelector('#inboxMessages');
+    if (messages) {
+        messages.innerHTML = `<p class="inbox-state ${kind}" role="status">${escapeHtml(message)}</p>`;
+        return;
+    }
+    inboxContainer.innerHTML = `<div class="inbox-state ${kind}"><p>${escapeHtml(message)}</p></div>`;
+}
+
+function showSignInPrompt() {
+    inboxContainer.innerHTML = `
+        <section class="inbox-state">
+            <span class="eyebrow">Private inbox</span>
+            <h2>Sign in to read your messages</h2>
+            <p>Messages are delivered to the email address on your account.</p>
+            <a class="btn-primary inbox-signin-link" href="#auth-bar">Go to sign in</a>
+        </section>
+    `;
+}
+
+function renderInbox(user) {
+    inboxContainer.innerHTML = `
+        <section class="inbox-hero">
+            <div>
+                <span class="eyebrow">Private inbox</span>
+                <h2>Your messages</h2>
+                <p>Send a note to another registered account by email.</p>
+            </div>
+            <span class="inbox-address">${escapeHtml(user.email || '')}</span>
+        </section>
+        <section class="inbox-compose">
+            <h3>New message</h3>
+            <form id="composeMessageForm">
+                <div class="inbox-compose-fields">
+                    <div class="mwk-field">
+                        <label for="messageTo">To</label>
+                        <input id="messageTo" name="recipientEmail" type="email" autocomplete="email" maxlength="254" placeholder="name@example.com" required>
+                    </div>
+                    <div class="mwk-field">
+                        <label for="messageSubject">Subject</label>
+                        <input id="messageSubject" name="subject" type="text" maxlength="120" required>
+                    </div>
+                </div>
+                <div class="mwk-field">
+                    <label for="messageBody">Message</label>
+                    <textarea id="messageBody" name="body" maxlength="3000" rows="4" required></textarea>
+                </div>
+                <button class="btn-primary" type="submit">Send message</button>
+                <p class="auth-status" id="composeStatus" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+        <section class="inbox-list-section" aria-labelledby="inbox-list-title">
+            <div class="inbox-list-heading">
+                <h3 id="inbox-list-title">Received</h3>
+                <span id="unreadCount" class="notification-pill"></span>
+            </div>
+            <div id="inboxMessages" class="inbox-grid" aria-live="polite">
+                <p class="inbox-state">Loading messages…</p>
+            </div>
+        </section>
+    `;
+    inboxContainer
+        .querySelector('#composeMessageForm')
+        .addEventListener('submit', (event) => sendMessage(event, user));
+}
+
+async function sendMessage(event, user) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const button = form.querySelector('[type="submit"]');
+    const status = form.querySelector('#composeStatus');
+    const values = new FormData(form);
+    const recipientEmail = values.get('recipientEmail').trim().toLowerCase();
+    const subject = values.get('subject').trim();
+    const body = values.get('body').trim();
+
+    if (!subject || !body) {
+        status.textContent = 'Add a subject and message before sending.';
+        return;
+    }
+
+    button.disabled = true;
+    status.textContent = 'Sending…';
+    try {
+        await addDoc(collection(db, 'inboxMessages'), {
+            recipientEmail,
+            senderUid: user.uid,
+            senderEmail: user.email,
+            subject,
+            body,
+            read: false,
+            createdAt: serverTimestamp(),
+        });
+        form.reset();
+        status.textContent = 'Message sent.';
+    } catch (error) {
+        status.textContent = firestoreErrorMessage(error);
+    } finally {
+        button.disabled = false;
+    }
+}
+
+function listenForMessages(user) {
+    const messagesQuery = query(
+        collection(db, 'inboxMessages'),
+        where('recipientEmail', '==', (user.email || '').toLowerCase()),
+        orderBy('createdAt', 'desc'),
+        limit(50)
+    );
+
+    stopListening = onSnapshot(
+        messagesQuery,
+        (snapshot) => {
+            const messages = snapshot.docs.map((message) => ({
+                id: message.id,
+                ...message.data(),
+            }));
+            renderMessages(messages);
+        },
+        (error) => {
+            console.error('Firestore inbox listener failed:', error);
+            const unreadCount = inboxContainer.querySelector('#unreadCount');
+            if (unreadCount) unreadCount.textContent = 'Inbox unavailable';
+            showFirestoreError(error);
+        }
+    );
+}
+
+function showFirestoreError(error) {
+    const list = inboxContainer.querySelector('#inboxMessages');
+    if (!list) {
+        showMessage(firestoreErrorMessage(error), 'error');
+        return;
+    }
+
+    const state = document.createElement('p');
+    state.className = 'inbox-state error';
+    state.setAttribute('role', 'status');
+    state.textContent = firestoreErrorMessage(error);
+
+    if (error?.code?.endsWith('failed-precondition')) {
+        const indexUrl = error.message.match(
+            /https:\/\/console\.firebase\.google\.com\/[^\s]+/
+        )?.[0];
+        if (indexUrl) {
+            const link = document.createElement('a');
+            link.className = 'inbox-index-link';
+            link.href = indexUrl.replace(/[),.;]+$/, '');
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.textContent = 'Create required index';
+            state.append(document.createElement('br'), link);
+        }
+    }
+
+    list.replaceChildren(state);
+}
+
+function renderMessages(messages) {
+    const list = inboxContainer.querySelector('#inboxMessages');
+    const unreadCount = inboxContainer.querySelector('#unreadCount');
+    const unread = messages.filter((message) => !message.read).length;
+    unreadCount.textContent = unread ? `${unread} unread` : 'All caught up';
+
+    if (!messages.length) {
+        list.innerHTML =
+            '<p class="inbox-state">No messages yet. Notes sent to your account email will appear here.</p>';
+        return;
+    }
+
+    list.innerHTML = messages
+        .map((message) => {
+            const date =
+                message.createdAt?.toDate?.().toLocaleString() || 'Just now';
+            return `
+            <article class="inbox-card ${message.read ? 'read' : 'unread'}">
                 <div class="inbox-card-header">
-                    <span class="notification-badge">${escapeHtml(item.badge)}</span>
-                    <span class="notification-time">${escapeHtml(item.time)}</span>
+                    <span class="notification-badge">${escapeHtml(message.senderEmail || 'Pinchly member')}</span>
+                    <time class="notification-time">${escapeHtml(date)}</time>
                 </div>
-                <h2>${escapeHtml(item.title)}</h2>
-                <p>${escapeHtml(item.message)}</p>
-                <p class="notification-subtext">${escapeHtml(item.subtext)}</p>
-                <div class="notification-footer">
-                    <span>${createIcon(item.type === 'news' ? ICONS.rocket : ICONS.bell, item.type)}</span>
-                    ${isRead ? '<span class="notification-pill">Read</span>' : '<span class="notification-pill notification-pill-new">New</span>'}
-                </div>
+                <h3>${escapeHtml(message.subject)}</h3>
+                <p class="inbox-message-body">${escapeHtml(message.body).replace(/\n/g, '<br>')}</p>
+                ${message.read ? '<span class="notification-pill">Read</span>' : `<button class="btn-secondary mark-read" type="button" data-message-id="${escapeHtml(message.id)}">Mark read</button>`}
             </article>
         `;
-    }).join('');
+        })
+        .join('');
+
+    list.querySelectorAll('.mark-read').forEach((button) => {
+        button.addEventListener('click', async () => {
+            button.disabled = true;
+            try {
+                await updateDoc(
+                    doc(db, 'inboxMessages', button.dataset.messageId),
+                    {
+                        read: true,
+                    }
+                );
+            } catch (error) {
+                console.error('Could not mark inbox message as read:', error);
+                button.disabled = false;
+                let status = button.parentElement.querySelector(
+                    '.inbox-action-error'
+                );
+                if (!status) {
+                    status = document.createElement('p');
+                    status.className = 'inbox-action-error';
+                    status.setAttribute('role', 'status');
+                    button.insertAdjacentElement('afterend', status);
+                }
+                status.textContent = firestoreErrorMessage(error);
+            }
+        });
+    });
+}
+
+function firestoreErrorMessage(error) {
+    const code = error?.code || '';
+    if (code.endsWith('permission-denied')) {
+        return 'Firestore rules denied this action. Publish the inbox rules from NOTES.md, including recipient read updates.';
+    }
+    if (code.endsWith('failed-precondition')) {
+        return 'Firestore needs a one-time index for recipient email and message date. Create it, then wait for Firebase to finish building it.';
+    }
+    if (code.endsWith('unauthenticated')) {
+        return 'Your sign-in expired. Sign in again and retry.';
+    }
+    if (code.endsWith('unavailable')) {
+        return 'Inbox is offline right now. Check your connection and retry.';
+    }
+    if (code.endsWith('not-found')) {
+        return 'This message no longer exists. Refresh the inbox and try again.';
+    }
+    return `Inbox request failed${code ? ` (${code})` : ''}. Check the browser console for details.`;
 }

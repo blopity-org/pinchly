@@ -1,168 +1,47 @@
-<!--
-  Copyright © 2026 GreatCoder1000. All Rights Reserved.
-  This source code may not be copied, modified, or redistributed
-  without permission.
--->
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inbox | Blopity Pinch</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Space+Grotesk:wght@300..700&display=swap"
         rel="stylesheet">
+    <script src="https://kit.fontawesome.com/965799bb38.js" crossorigin="anonymous"></script>
     <script src="./js/theme.js"></script>
     <link href="style.css" rel="stylesheet">
     <script src="./js/devMode.js"></script>
+    <script type="module" src="./js/auth.js"></script>
     <link rel="icon" type="image/svg+xml" href="./media/blopity-pinch.svg">
 </head>
 
 <body>
     <div class="header">
         <h1>Blopity Pinch</h1>
-        <h2>Community</h2>
-        <p>Small tools, useful updates, no fuss.</p>
+        <h2>Inbox</h2>
+        <p>Messages for your account, delivered live.</p>
     </div>
-    <div id="navbar">
-        <a href="index.html">
-            Blopity Pinch
-        </a>
-        <a href="builder.html">
-            Create
-        </a>
-        <a href="apps.html">
-            Explore
-        </a>
-        <a href="community.html">
-            Community
-        </a>
-        <a class="active" href="inbox.html">
-            Inbox
-        </a>
-    </div>
+    <nav id="navbar" aria-label="Main navigation">
+        <a href="index.html">Blopity Pinch</a>
+        <a href="builder.html">Create</a>
+        <a href="apps.html">Explore</a>
+        <a href="community.html">Community</a>
+        <a class="active" href="inbox.html" aria-current="page">Inbox</a>
+    </nav>
     <div class="auth-bar" id="auth-bar"></div>
     <div class="page-shell">
-        <div class="slick-bg">
-            <header class="topbar">
-                <div>
-                    <p class="eyebrow">BLOPITY PINCH</p>
-                    <h1>Your little corner of the inbox</h1>
+        <main>
+            <section class="card">
+                <div class="container" id="inbox-container" aria-live="polite">
+                    <p class="inbox-state">Connecting to your inbox…</p>
                 </div>
-                <nav class="topbar-nav">
-                    <a href="index.html">Blopity Pinch</a>
-                    <a href="apps.html">Apps</a>
-                    <a href="builder.html">App Builder</a>
-                </nav>
-            </header>
-            <main>
-                <div class="card">
-                    <div class="container">
-                        <ul class="no-bullets">
-                            <li class="inbox-item">
-                                <div class="inbox-item-main">C++26 updates</div>
-                                <div class="inbox-item-footer">By <a href="community.html?user=pinchi">@pinchi</a>. Sent
-                                    <span class="datetime">2026/08/08</span></div>
-                            </li>
-                            <li class="inbox-item">
-                                <div class="inbox-item-main">What the TypeScript? Number 1 language on GitHub.</div>
-                                <div class="inbox-item-footer">By <a href="community.html?user=pinchi">@pinchi</a>. Sent
-                                    <span class="datetime">2026/08/08</span></div>
-                            </li>
-                            <li class="inbox-item">
-                                <div class="inbox-item-main">JDK 25 LTS ships, and Spring Boot 4.0 has arrived.</div>
-                                <div class="inbox-item-footer">By <a href="community.html?user=pinchi">@pinchi</a>. Sent
-                                    <span class="datetime">2026/08/08</span></div>
-                            </li>
-                            <li class="inbox-item">
-                                <div class="inbox-item-main">Ruby 4.0 ships ZJIT and Ruby::Box!</div>
-                                <div class="inbox-item-footer">By <a href="community.html?user=pinchi">@pinchi</a>. Sent
-                                    <span class="datetime">2026/08/08</span></div>
-                            </li>
-                            <li class="inbox-item">
-                                <div class="inbox-item-main">Next.js 16+ Now a &quot;Full-Stack Orchestrator.&quot;
-                                </div>
-                                <div class="inbox-item-footer">By <a href="community.html?user=pinchi">@pinchi</a>. Sent
-                                    <span class="datetime">2026/08/08</span></div>
-                            </li>
-                            <li class="inbox-item">
-                                <div class="inbox-item-main">Svelte 6 abandons Virtual DOM!</div>
-                                <div class="inbox-item-footer">By <a href="community.html?user=pinchi">@pinchi</a>. Sent
-                                    <span class="datetime">2026/08/08</span></div>
-                            </li>
-                            <li class="inbox-item">
-                                <div class="inbox-item-main">Kotlin speed updates (40 percent faster builds!)</div>
-                                <div class="inbox-item-footer">By <a href="community.html?user=pinchi">@pinchi</a>. Sent
-                                    <span class="datetime">2026/08/08</span></div>
-                            </li>
-                            <li class="inbox-item">
-                                <div class="inbox-item-main">Swift 6.4 brings some new features</div>
-                                <div class="inbox-item-footer">By <a href="community.html?user=pinchi">@pinchi</a>. Sent
-                                    <span class="datetime">2026/08/08</span></div>
-                            </li>
-                            <li class="inbox-item">
-                                <div class="inbox-item-main">Flutter: Shader jank eliminated, LLMs now generate Flutter
-                                    UIs via GenUI SDK</div>
-                                <div class="inbox-item-footer">By <a href="community.html?user=pinchi">@pinchi</a>. Sent
-                                    <span class="datetime">2026/08/08</span></div>
-                            </li>
-                            <li class="inbox-item">
-                                <div class="inbox-item-main">Cloudflare releases an experimental Next.js alternative
-                                    built with AI in one week with 4.4&times; faster builds!</div>
-                                <div class="inbox-item-footer">By <a href="community.html?user=pinchi">@pinchi</a>. Sent
-                                    <span class="datetime">2026/08/08</span></div>
-                            </li>
-                            <li class="inbox-item">
-                                <div class="inbox-item-main">.NET 10 now in production&mdash; Ships with C&num; 14</div>
-                                <div class="inbox-item-footer">By <a href="community.html?user=pinchi">@pinchi</a>. Sent
-                                    <span class="datetime">2026/08/08</span></div>
-                            </li>
-                            <li class="inbox-item">
-                                <div class="inbox-item-main">uv is replacing pip + Poetry</div>
-                                <div class="inbox-item-footer">By <a href="community.html?user=pinchi">@pinchi</a>. Sent
-                                    <span class="datetime">2026/08/08</span></div>
-                            </li>
-                            <li class="inbox-item">
-                                <div class="inbox-item-main">AI benchmark experiment shows dynamic languages i.e. Ruby,
-                                    Python, JS are fastest and cheapest for AI-generated code!</div>
-                                <div class="inbox-item-footer">By <a href="community.html?user=pinchi">@pinchi</a>. Sent
-                                    <span class="datetime">2026/08/08</span></div>
-                            </li>
-                            <li class="inbox-item">
-                                <div class="inbox-item-main">Teams adopt &quot;meta-repos&quot; to help AI agents
-                                    navigate large codebases!</div>
-                                <div class="inbox-item-footer">By <a href="community.html?user=pinchi">@pinchi</a>. Sent
-                                    <span class="datetime">2026/08/08</span></div>
-                            </li>
-                            <li class="inbox-item">
-                                <div class="inbox-item-main">JetBrains pivots away from Fleet&semi; toward newer
-                                    AI-driven development tools.</div>
-                                <div class="inbox-item-footer">By <a href="community.html?user=pinchi">@pinchi</a>. Sent
-                                    <span class="datetime">2026/08/08</span></div>
-                            </li>
-                            <li class="inbox-item">
-                                <div class="inbox-item-main">WASM3 Adds GC and Memory64</div>
-                                <div class="inbox-item-footer">By <a href="community.html?user=pinchi">@pinchi</a>. Sent
-                                    <span class="datetime">2026/08/08</span></div>
-                            </li>
-                            <li class="inbox-item">
-                                <div class="inbox-item-main">Something new: Mojo!</div>
-                                <div class="inbox-item-footer">By <a href="community.html?user=pinchi">@pinchi</a>. Sent
-                                    <span class="datetime">2026/08/08</span></div>
-                            </li>
-                            <li class="inbox-item">
-                                <div class="inbox-item-main">Python 3.14 Released!</div>
-                                <div class="inbox-item-footer">By <a href="community.html?user=pinchi">@pinchi</a>. Sent
-                                    <span class="datetime">2025/10/07</span></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </main>
-        </div>
+            </section>
+        </main>
     </div>
+    <script type="module" src="./js/inbox.js"></script>
 </body>
 
 </html>
